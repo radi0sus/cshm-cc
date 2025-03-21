@@ -848,8 +848,8 @@ def save_xyz(filename, xyz_dict):
   
 # argument parser START ##################################################################
 parser = argparse.ArgumentParser(prog='cshm-calc', 
-        description = "Calculation of τ₄, τ₄', τ₅, O geometry indices and CShM from"
-                      "single and combined CIF or CIF from the COD")
+        description = "Calculation of CShM and τ₄, τ₄', τ₅, and O geometry indices from "
+                      "single and combined CIFs, or CIFs from the COD.")
 
 #filename is required
 parser.add_argument('filename',
@@ -864,7 +864,7 @@ parser.add_argument('-n','--numtrials',
     
 parser.add_argument('-ex','--exact',
     action = 'store_true',
-    help = 'slow, but exact calculation of CShM')
+    help = 'slower CShM calculation that always finds the global minmum')
 
 #exclude atoms by distance
 parser.add_argument('-d','--dist',
