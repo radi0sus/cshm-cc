@@ -47,6 +47,9 @@ The following output will be printed:
     |          TPR-6 |             14.1660 |             16.7105 |   <- CShM (suitable for CN = 6)
     |         JPPY-6 |             30.0476 |             33.6764 |   <- CShM (suitable for CN = 6)
 
+The central atom(s) or transition metal atom(s) and their coordination number(s) will be automatically determined, 
+and all related values will be calculated. There is no manual choice of atom(s); only a maximum bonding distance can be set (`-d` option).
+
 Start the script with:
 ```console
 python3 cshm-cc.py example.cif > example.md
