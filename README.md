@@ -80,7 +80,7 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 [here (cosymlib)](https://github.com/GrupEstructuraElectronicaSimetria/cosymlib/blob/master/cosymlib/shape/ideal_structures_center.yaml).
 - The script's results should match those of the [online calculator](https://csm.ouproj.org.il/molecule) or the [Shape program](https://www.ee.ub.edu/downloads/) when using default options.
 - The CShM calculation employs a fast optimization process using the Hungarian algorithm. When only a small number of random trials is performed, the result may converge to a local minimum.
-- For recommended number of trials, see below.
+  For recommended number of trials, [see below](#regarding-the-number-of-trials).
 - The `-ex` option enables a slower CShM calculation, which ensures finding the global minimum.
 - The script downloads the CIF from the COD into a temporary folder. The CIF is deleted after the script finishes.
 
