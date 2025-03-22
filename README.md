@@ -97,6 +97,6 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 The CShM calculation employs a fast optimization process using the Hungarian algorithm. When only a small number of random trials is performed, the result may converge to a local minimum.
 To determine the optimal number of trials, 100 runs were conducted with trial counts ranging from 1 to 100. The results are shown in the figure below:
 
-<img src='examples\Figure_1.png' width='800' alt='CShM vs. Number of Trials' align='center'>
+<img src='examples\Figure_1.png' width='1024' alt='CShM vs. Number of Trials' align='center'>
 
 The global minimum solutions are displayed on the y-axis. Except for $\textcolor{blue}{\textrm{OC-6}}$ (the lowest CShM value) and $\textcolor{orange}{\textrm{HP-6}}$, the algorithm occasionally converges to local minima, which are higher than the global minimum. As seen from the color intensity of the points, the tendency to optimize local minima decreases significantly after approximately 20 trials and disappears completely after 40 trials. Thus, a "number of trials" of around 100 should be sufficient.
