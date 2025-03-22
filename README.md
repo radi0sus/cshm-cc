@@ -10,12 +10,12 @@ This script calculates the Continuous Shape Measures (CShM) and geometry indices
  `gemmi`, `numpy`, `scipy`, `tabulate` 
  
 ## Quick start
- Start the script with:
+For local CIFs with one or more entries start the script with:
 ```console
 python3 cshm-cc.py filename.cif
 ```
-for local CIFs with one or more entries or, for example:
+or to retrieve structural data from the COD (Crystallography Open Database), for example:
 ```console
 python3 cshm-cc.py 1546808
 ```
-to retrieve structural data from the COD (Crystallography Open Database).  
+ 
