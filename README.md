@@ -100,3 +100,81 @@ To determine the optimal number of trials, 100 runs were conducted with trial co
 <img src='examples\Figure_1.png' width='1024' alt='CShM vs. Number of Trials' align='center'>
 
 The values for the global minimum solutions are displayed on the y-axis. Except for $\textcolor{blue}{\textrm{OC-6}}$ (the lowest CShM value) and $\textcolor{orange}{\textrm{HP-6}}$, the algorithm occasionally converges to local minima, which are higher than the global minimum. As seen from the color intensity of the points, the tendency to optimize local minima decreases significantly after approximately 20 trials and disappears completely after 40 trials. Thus, a "number of trials" of around 100 should be sufficient.
+
+## Polyhedra and Shape Reference
+
+<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'><img src='examples\all_polyhedra5.png' alt='Polyhedra and Shape Reference' width=800 align='center'></a>
+  
+## Examples
+
+## References
+If you use τ<sub>4</sub>, τ<sub>5</sub>, the *O* index or CShM to describe the coordination geometry of your compounds, please cite one or more of the following articles:
+
+**τ<sub>4</sub>**:
+> "Structural variation in copper(i) complexes with pyridylmethylamide ligands: 
+>  structural analysis with a new four-coordinate geometry index, τ<sub>4</sub>"
+>  
+> Lei Yang, Douglas R. Powell, Robert P. Houser,
+> *Dalton Trans.* **2007**, 955-964.
+> 
+> DOI: https://doi.org/10.1039/B617136B
+
+**τ<sub>4</sub>' (τ<sub>4</sub> improved)**:
+> "Coordination polymers and molecular structures among complexes of 
+>  mercury(II) halides with selected 1-benzoylthioureas"
+> 
+> Andrzej Okuniewski, Damian Rosiak, Jarosław Chojnacki, Barbara Becker,
+> *Polyhedron* **2015**, *90*, 47–57.
+> 
+> DOI: https://doi.org/10.1016/j.poly.2015.01.035
+
+**τ<sub>5</sub>**:
+> "Synthesis, structure, and spectroscopic properties of copper(II) compounds containing 
+>  nitrogen–sulphur donor ligands; the crystal and molecular structure of 
+>  aqua[1,7-bis(N-methylbenzimidazol-2′-yl)-2,6-dithiaheptane]copper(II) perchlorate"
+>  
+> Anthony W. Addison, T. Nageswara Rao, Jan Reedijk, Jacobus van Rijn, Gerrit C. Verschoor, 
+> *J. Chem. Soc., Dalton Trans.* **1984**, 1349-1356.
+> 
+> DOI: https://doi.org/10.1039/DT9840001349
+
+***O***:
+> "Structural, electrochemical and photophysical behavior of Ru(II) complexes with 
+>  large bite angle sulfur-bridged terpyridyl ligands"
+>  
+> Christopher M. Brown, Nicole E. Arsenault, Trevor N. K. Cross, Duane Hean, Zhen Xu, 
+> Michael O. Wolf, 
+> *Inorg. Chem. Front.* **2020**, *7*, 117-127.
+> 
+> DOI: https://doi.org/10.1039/C9QI01009B
+
+**CShM**:
+> "Continuous Symmetry Measures. 5. The Classical Polyhedra"
+>  
+> Mark Pinsky, David Avnir, 
+> *Inorg. Chem.* **1998**, *37*, 5575–5582.
+> 
+> DOI: https://doi.org/10.1021/ic9804925
+> 
+> "Shape maps and polyhedral interconversion paths in transition metal chemistry"
+>  
+> Santiago Alvarez, Pere Alemany, David Casanova, Jordi Cirera, Miquel Llunell, David Avnir,
+> *Coord. Chem. Rev.*, **2005**, *249*, 1693–1708.
+> 
+> DOI: https://doi.org/10.1016/j.ccr.2005.03.031
+
+The script uses the **Gemmi** library for CIF processing:
+> "GEMMI: A library for structural biology"
+> 
+> Marcin Wojdyr,
+> *Journal of Open Source Software* **2022**, *7 (73)*, 4200.
+>
+> DOI: https://doi.org/10.1021/ic9804925
+
+https://gemmi.readthedocs.io/en/latest/
+
+https://github.com/project-gemmi/gemmi
+
+The **Crystallography Open Database**:
+
+https://www.crystallography.net/cod/
