@@ -46,3 +46,16 @@ The following output will be printed:
     |           OC-6 |            *0.4782* |            *0.0261* |   <- CShM (lowest values highlighted)
     |          TPR-6 |             14.1660 |             16.7105 |   <- CShM (suitable for CN = 6)
     |         JPPY-6 |             30.0476 |             33.6764 |   <- CShM (suitable for CN = 6)
+
+Start the script with:
+```console
+python3 cshm-cc.py example.cif > example.md
+```
+will save the output in markdown format.
+
+Convert markdown to docx (install [PANDOC](https://pandoc.org) first):
+```console
+pandoc filename.md -o filename.docx
+```
+This will convert the markdown file to a docx file. Open it with your favorite
+word processor. Convert the file to even more formats such as HTML, PDF or TeX with PANDOC.
