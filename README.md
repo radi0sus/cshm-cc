@@ -82,6 +82,7 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - The CShM calculation employs a fast optimization process using the Hungarian algorithm. When only a small number of random trials is performed, the result may converge to a local minimum.
 - For recommended number of trials, see below.
 - The `-ex` option enables a slower CShM calculation, which ensures finding the global minimum.
+- The script downloads the CIF from the COD into a temporary folder. The CIF is deleted after the script finishes.
 
 ## Known Issues
 - The script determines ligand atoms based on the bonding section in the CIF file; therefore, this section must be present.
