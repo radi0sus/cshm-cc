@@ -95,8 +95,9 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - The CShM method is rewritten from the [C++ code](https://github.com/continuous-symmetry-measure/shape) and may still contain errors.
 
 ## Regarding the number of trials
-The CShM calculation employs a fast optimization process using the Hungarian algorithm. When only a small number of random trials is performed, the result may converge to a local minimum.
-To determine the optimal number of trials, 100 runs were conducted with trial counts ranging from 1 to 100. The results are shown in the figure below:
+
+The CShM calculation employs a fast optimization process using the Hungarian algorithm. When only a small number of random trials are performed, the result may converge to a local minimum.
+To determine the optimal number of trials, 100 runs were conducted, each with trial counts ranging from 1 to 100 (a total of 100 × 100 calculations). The results are shown in the figure below.
 
 <img src='examples\Figure_1.png' width='1024' alt='CShM vs. Number of Trials' align='center'>
 
