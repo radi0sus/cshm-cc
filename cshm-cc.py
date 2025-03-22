@@ -854,7 +854,7 @@ parser = argparse.ArgumentParser(prog='cshm-calc',
 #filename is required
 parser.add_argument('filename',
     type = str,
-    help = 'filename, CIF or COD number; e.g. mystructure.cif or 12345678')
+    help = 'filename (CIF) or COD ID; e.g. mystructure.cif or 12345678')
 
 #exclude atoms by distance
 parser.add_argument('-n','--numtrials',
@@ -864,7 +864,7 @@ parser.add_argument('-n','--numtrials',
     
 parser.add_argument('-ex','--exact',
     action = 'store_true',
-    help = 'slower CShM calculation that always finds the global minmum')
+    help = 'slower CShM calculation that always finds the global minimum')
 
 #exclude atoms by distance
 parser.add_argument('-d','--dist',
