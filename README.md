@@ -69,3 +69,34 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - `-ex` (optional): Uses a slower CShM calculation that guarantees finding the global minimum.
 - `-sxyz` (optional): Saves the XYZ coordinates of the central atom and its neighboring atoms. If multiple entries are provided, they are combined (filename: `cif_name.xyz` or `cod_id.xyz`).
 - `-v` (optional): Enables verbose output, printing all bond lengths and angles of the central atom with its neighboring atoms.
+
+## Remarks
+- All parameter calculations are based on the estimated coordination number(s).
+- The central atom(s) or transition metal atom(s) and their coordination number(s) are determined automatically. There is no manual selection of atoms possible.
+- The XYZ coordinates of neighboring atoms are provided relative to the central atom, which is positioned at [0, 0, 0].
+- The XYZ file (option: `-sxyz`) can be used for further analysis of coordination geometry.
+- The polyhedral volume should match the value calculated by [Olex2](https://www.olexsys.org/olex2/).
+- Reference shapes for CShM are from
+[here (cosymlib)](https://github.com/GrupEstructuraElectronicaSimetria/cosymlib/blob/master/cosymlib/shape/ideal_structures_center.yaml).
+- The script's results should match those of the [online calculator](https://csm.ouproj.org.il/molecule) or the [Shape program](https://www.ee.ub.edu/downloads/) when using default options.
+- The CShM calculation employs a fast optimization process using the Hungarian algorithm. When only a small number of random trials is performed, the result may converge to a local minimum.
+- For recommended number of trials, see below.
+- The `-ex` option enables a slower CShM calculation, which ensures finding the global minimum.
+
+## Known Issues
+- The script determines ligand atoms based on the bonding section in the CIF file; therefore, this section must be present.
+- Additionally, all bond angles involving the central atom must be included in the CIF file.
+- The script may fail if bonding information is incomplete; for example, if symmetry-equivalent positions are missing or if manual entries have been made.
+- Metal-metal bonding can also cause issues in some cases.
+- If problems arise, the only available option is to reduce the number of bonds considered using the `-d` option.
+- The script can only remove atoms from the coordination sphere, not add them. Ensure that the connectivity list is appropriate.
+- Hydrogen atoms are generally ignored. As a result, hydrogen atoms in metal hydrides will not be considered.
+- The CShM method is rewritten from the [C++ code](https://github.com/continuous-symmetry-measure/shape) and may still contain errors.
+
+## Regarding the number of trials
+The CShM calculation employs a fast optimization process using the Hungarian algorithm. When only a small number of random trials is performed, the result may converge to a local minimum.
+To determine the optimal number of trials, 100 runs were conducted with trial counts ranging from 1 to 100. The results are shown in the figure below:
+
+<img src='examples\Figure_1.png' width='800' alt='CShM vs. Number of Trials' align='center'>
+
+The global minimum solutions are displayed on the y-axis. Except for $\textcolor{blue}{\textrm{OC-6}}$ (the lowest CShM value) and $\textcolor{orange}{\textrm{HP-6}}$, the algorithm occasionally converges to local minima, which are higher than the global minimum. As seen from the color intensity of the points, the tendency to optimize local minima decreases significantly after approximately 20 trials and disappears completely after 40 trials. Thus, a "number of trials" of around 100 should be sufficient.
