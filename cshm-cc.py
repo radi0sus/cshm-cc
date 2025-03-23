@@ -522,8 +522,7 @@ def get_coordinates(doc, atom, bond_table, cn):
                                                 real_pos.y - cart_coord_ca.y,
                                                 real_pos.z - cart_coord_ca.z]])
                 # coordinates for the XYZ file, which is: element x y z
-                neighbor_xyz = (f'{el_label.name:<2}' 
-                                f'{(real_pos.x - cart_coord_ca.x):>11.8f} ' 
+                neighbor_xyz = (f'{el_label.name:<2} {(real_pos.x - cart_coord_ca.x):>11.8f} ' 
                                 f'{(real_pos.y - cart_coord_ca.y):>11.8f} ' 
                                 f'{(real_pos.z - cart_coord_ca.z):>11.8f}')
                 # add coordinates of neighbors
