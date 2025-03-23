@@ -13,7 +13,7 @@ Square planar geometry: $\tau_4 = 0$; Tetrahedral geometry:  $\tau_4 = 1$; Seesa
 
 $\tau'_4 = \frac{\beta-\alpha}{250.5°}+\frac{180-\beta}{70.5°}$
 
-Square planar geometry: $\tau'_4 = 0$; Tetrahedral geometry:  $\tau'_4 = 1$; Seesaw geometry: $\tau_4 \approx 0.24$
+Square planar geometry: $\tau'_4 = 0$; Tetrahedral geometry:  $\tau'_4 = 1$; Seesaw geometry: $\tau'_4 \approx 0.24$
 
 $\tau_5 = \frac{\beta-\alpha}{60°}$
 
