@@ -5,6 +5,26 @@ A Python 3 script that calculates CShM (Continuous Shape Measures) values for va
 ## Introduction
 This script calculates the Continuous Shape Measures (CShM) and geometry indices (τ₄, τ₄', τ₅, and *O* (octahedricity)) to assign coordination geometries to three-, four-, five and six-coordinate transition metal atoms. The indices τ₄ and τ₅ are used to determine whether a compound adopts tetrahedral, trigonal pyramidal, square planar, or seesaw geometry (for four-coordinated compounds), and square pyramidal or trigonal bipyramidal geometry (for five-coordinated compounds). These assignments rely on the two largest angles enclosing the central atom. The octahedricity index, *O*, is calculated based on experimental X-M-X angles and assesses how close the geometry is to an ideal octahedron. The CShM value approaches zero when the shape closely matches the ideal geometry. Additionally, the polyhedral volume is calculated using the Convex Hull Algorithm (via SciPy and the Qhull Library). For more information, refer to the associated papers and references.
 
+#### Equations and values for the geometry indices τ₄, τ₄', τ₅, and *O*:
+
+$\tau_4 = \frac{360°-(\alpha+\beta)}{141°}$ 
+
+Square planar geometry: $\tau_4 = 0$; Tetrahedral geometry:  $\tau_4 = 1$; Seesaw geometry: $\tau_4 \approx 0.43$
+
+$\tau'_4 = \frac{\beta-\alpha}{250.5°}+\frac{180-\beta}{70.5°}$
+
+Square planar geometry: $\tau'_4 = 0$; Tetrahedral geometry:  $\tau'_4 = 1$; Seesaw geometry: $\tau_4 \approx 0.24$
+
+$\tau_5 = \frac{\beta-\alpha}{60°}$
+
+Square pyramidal geometry: $\tau_5 = 0$; Trigonal bipyramidal geometry: $\tau_5 = 1$
+
+$O = \sqrt{\frac{1}{15}\sum_{i=1}^{15}(\hat{\theta_i} - \theta)^2}$
+
+$\hat{\theta_i}$ = 180° for *trans* X-M-X angles and 90° for *cis* X-M-X angles\
+$\theta$ = experimental X-M-X angles 
+$O$ is close to zero for an almost ideal octahedron
+
 ## External modules
  `gemmi`, `numpy`, `scipy`, `tabulate`, `requests` 
  
@@ -73,6 +93,7 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 ## Remarks
 - All parameter calculations are based on the estimated coordination number(s).
 - The central atom(s) or transition metal atom(s) and their coordination number(s) are determined automatically. There is no manual selection of atoms possible.
+- Manual selection of atoms is possible with the script [tau-calc](https://github.com/radi0sus/tau-calc).
 - The XYZ coordinates of neighboring atoms are provided relative to the central atom, which is positioned at [0, 0, 0].
 - The XYZ file (option: `-sxyz`) can be used for further analysis of coordination geometry.
 - The polyhedral volume should match the value calculated by [Olex2](https://www.olexsys.org/olex2/).
