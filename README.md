@@ -101,7 +101,7 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 
 ## Remarks
 - All parameter calculations are based on the estimated coordination number(s).
-- Parameters like angles and distances are calculated from the atomic coordinates using the `gemmi` module. Therefore, symmetry operations may differ from those in the CIF.
+- Parameters like angles and distances are calculated from the atomic coordinates using the `gemmi` module. Therefore, symmetry operations for bonded atoms may differ from those in the CIF.
   Estimated standard deviations (e.s.d.) on bond lengths and angles are not calculated.
 - The advantage of this method, compared to the one in the classic version, is that it now recognizes a much larger number of CIFs, especially those from the COD.
   A bonding section in the CIF file is no longer required.
