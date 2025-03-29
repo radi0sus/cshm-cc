@@ -3,7 +3,7 @@
 A Python 3 script that calculates CShM (Continuous Shape Measures) values for various shapes, geometry indices, including τ₄, τ₄', τ₅, *O* (octahedricity) of automatically selected atoms (transition metal atoms by default) from a crystallographic information file (CIF). The CIF may contain one or more entries. It can also calculate these values from COD (Crystallography Open Database) entries by simply entering the COD ID. It also saves the XYZ coordinates of the central atom and its neighboring atoms, including those from CIFs with multiple entries or COD entries and calculates the polyhedral volume. Optionally, tables in Markdown format containing bond lengths and angles can be generated.
 
 ## Introduction
-This script calculates the Continuous Shape Measures (CShM) and geometry indices (τ₄, τ₄', τ₅, and *O* (octahedricity)) to assign coordination geometries to three-, four-, five and six-coordinate transition metal atoms. The indices τ₄ and τ₅ are used to determine whether a compound adopts tetrahedral, trigonal pyramidal, square planar, or seesaw geometry (for four-coordinated compounds), and square pyramidal or trigonal bipyramidal geometry (for five-coordinated compounds). These assignments rely on the two largest angles enclosing the central atom. The octahedricity index, *O*, is calculated based on experimental X-M-X angles and assesses how close the geometry is to an ideal octahedron. The CShM value approaches zero when the shape closely matches the ideal geometry. Additionally, the polyhedral volume is calculated using the Convex Hull Algorithm (via SciPy and the Qhull Library). For more information, refer to the associated papers and references.
+This script calculates the Continuous Shape Measures (CShM) and geometry indices (τ₄, τ₄', τ₅, and *O* (octahedricity)) to assign coordination geometries to two-, three-, four-, five and six-coordinate transition metal atoms. The indices τ₄ and τ₅ are used to determine whether a compound adopts tetrahedral, trigonal pyramidal, square planar, or seesaw geometry (for four-coordinated compounds), and square pyramidal or trigonal bipyramidal geometry (for five-coordinated compounds). These assignments rely on the two largest angles enclosing the central atom. The octahedricity index, *O*, is calculated based on experimental X-M-X angles and assesses how close the geometry is to an ideal octahedron. The CShM value approaches zero when the shape closely matches the ideal geometry. Additionally, the polyhedral volume is calculated using the Convex Hull Algorithm (via SciPy and the Qhull Library). For more information, refer to the associated papers and references.
 
 #### Equations and values for the geometry indices τ₄, τ₄', τ₅, and *O*:
 
@@ -35,7 +35,7 @@ For local CIFs with one or more entries start the script with:
 python3 cshm-cc.py example.cif
 ```
 The following output will be printed:
-
+    Fe1 (example): CN = 5, min dist. = 1.9799 Å, max dist. = 2.3664 Å 
  
     |   **compound** |   **Fe1 (example)**     |   <- Central atom (CIF entry) 
     |----------------|-------------------------|
@@ -54,6 +54,9 @@ Or to retrieve structural data from the COD (Crystallography Open Database), for
 python3 cshm-cc.py 4110517
 ```
 The following output will be printed:
+    Fe1 (4110517): CN = 6, min dist. = 1.8997 Å, max dist. = 1.9875 Å  
+    Co1 (4110517): Warning! Co1 has been excluded from coordinating atoms.  
+    Co1 (4110517): CN = 6, min dist. = 2.0824 Å, max dist. = 2.1582 Å 
 
     |   **compound** |   **Fe1 (4110517)** |   **Co1 (4110517)** |   <- Central atoms (COD ID)  
     |----------------|---------------------|---------------------|
@@ -86,13 +89,25 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 ## Command-line options
 - `filename or COD ID` (required): A CIF (Crystallographic Information File) with the .cif extension or a COD ID (an integer without an extension), e.g., `example.cif` or `12345678`.
 - `-d` `N` (optional): Excludes atoms with bond lengths larger than `N` Å from the central atom in the calculation (e.g., `-d 2.1`).
+- `-eh` (optional): Exclude all hydrogen atoms.
 - `-n` `N` (optional): Specifies the number of trials (`N` > 0) for the fast CShM calculation (default: 124).
 - `-ex` (optional): Uses a slower CShM calculation that guarantees finding the global minimum.
 - `-sxyz` (optional): Saves the XYZ coordinates of the central atom and its neighboring atoms. If multiple entries are provided, they are combined (filename: `cif_name.xyz` or `cod_id.xyz`).
 - `-v` (optional): Enables verbose output, printing all bond lengths and angles of the central atom with its neighboring atoms.
+- `-p` (optional): Plot bar graphs of CShM metrics for easier visual comparison.
+- `-pc` (optional): Plot color bar graphs of CShM metrics for easier visual comparison.
 
 ## Remarks
 - All parameter calculations are based on the estimated coordination number(s).
+- Parameters like angles and distances are calculated from the atomic coordinates using the `gemmi` module. Therefore, symmetry operations may differ from those in the CIF.
+  Estimated standard deviations (e.s.d.) on bond lengths and angles are not calculated.
+- The advantage of this method, compared to the one in the classic version, is that it now recognizes a much larger number of CIFs, especially those from the COD.
+  A bonding section in the CIF file is no longer required.
+- Possible bonds are now determined based on covalent radii. Several reported radii have been tested with varying success.
+  In the end, the maximum radius of each element is used, with 10% added to the sum of the radii of the central and ligand atoms.
+  This approach successfully identifies nearly all bonds to ligand atoms but also detects numerous metal-metal bonds,
+  including those between the central atom and itself or other metals of the same element.
+  These metal-metal bonds are excluded from further calculations.
 - The central atom(s) or transition metal atom(s) and their coordination number(s) are determined automatically. There is no manual selection of atoms possible.
 - Manual selection of atoms is possible with the script [tau-calc](https://github.com/radi0sus/tau-calc).
 - The XYZ coordinates of neighboring atoms are provided relative to the central atom, which is positioned at [0, 0, 0].
@@ -107,17 +122,12 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - The script downloads the CIF from the COD into a temporary folder. The CIF is deleted after the script finishes.
 
 ## Known Issues
-- The script determines ligand atoms based on the bonding section in the CIF file; therefore, this section must be present.
-- Additionally, all bond angles involving the central atom must be included in the CIF file.
-- The script may fail if bonding information is incomplete; for example, if symmetry-equivalent positions are missing or if manual entries have been made.
-- Metal-metal bonding can also cause issues in some cases.
+- In rare cases, the `gemmi` module does not return the correct coordinates for symmetry-equivalent positions. When this happens, the script exits.
 - If problems arise, the only available option is to reduce the number of bonds considered using the `-d` option.
 - The script can only remove atoms from the coordination sphere, not add them. Ensure that the connectivity list is appropriate.
-- Hydrogen atoms are generally ignored. As a result, hydrogen atoms in metal hydrides will not be considered.
 - The CShM method is rewritten from the [C++ code](https://github.com/continuous-symmetry-measure/shape) and may still contain errors.
 
 ## Regarding the number of trials
-
 The CShM calculation employs a fast optimization process using the Hungarian algorithm. When only a small number of random trials are performed, the result may converge to a local minimum.
 To determine the optimal number of trials, 100 runs were conducted, each with trial counts ranging from 1 to 100 (a total of 100 × 100 calculations). The results are shown in the figure below.
 
@@ -126,7 +136,6 @@ To determine the optimal number of trials, 100 runs were conducted, each with tr
 The values for the global minimum solutions are displayed on the y-axis. Except for $\textcolor{blue}{\textrm{OC-6}}$ (the lowest CShM value) and $\textcolor{orange}{\textrm{HP-6}}$, the algorithm occasionally converges to local minima, which are higher than the global minimum. As seen from the color intensity of the points, the tendency to optimize local minima decreases significantly after approximately 20 trials and disappears completely after 40 trials. Thus, a "number of trials" of around 100 should be sufficient.
 
 ## Polyhedra and Shape Reference
-
 <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'><img src='examples\all_polyhedra5.png' alt='Polyhedra and Shape Reference' width=800 align='center'></a>
   
 ## Examples
@@ -136,12 +145,19 @@ The values for the global minimum solutions are displayed on the y-axis. Except 
 ```console
 python3 cshm-cc.py combined.cif
 ```
+    Ru1 (I): CN = 6, min dist. = 2.0645 Å, max dist. = 2.0656 Å  
+    Cu1 (anko4): CN = 3, min dist. = 1.8636 Å, max dist. = 1.9991 Å  
+    7718332: Warning! No metal atoms or '_atom_site_type_symbol' is missing.  
+    Fe1 (av12_25): Warning! Fe1 has been excluded from coordinating atoms.  
+    Fe1 (av12_25): CN = 4, min dist. = 1.9890 Å, max dist. = 2.2038 Å  
+    
     |   **compound** |   **Ru1 (I)** |   **Cu1 (anko4)** |   **Fe1 (av12_25)** |
     |----------------|---------------|-------------------|---------------------|
     |             CN |             6 |                 3 |                   4 |
     |             τ₄ |               |                   |              0.9035 |
     |            τ₄' |               |                   |              0.8976 |
-    |              O |        7.1201 |                   |                     |
+    |             τ₅ |               |                   |                     |
+    |              O |        7.1226 |                   |                     |
     |          V /Å³ |       11.5171 |            0.0415 |              4.5706 |
     |                |               |                   |                     |
     |           TP-3 |               |          *2.1792* |                     |
@@ -152,6 +168,11 @@ python3 cshm-cc.py combined.cif
     |            T-4 |               |                   |            *1.2134* |
     |           SS-4 |               |                   |              8.3243 |
     |        vTBPY-4 |               |                   |              3.0150 |
+    |           PP-5 |               |                   |                     |
+    |          vOC-5 |               |                   |                     |
+    |         TBPY-5 |               |                   |                     |
+    |          SPY-5 |               |                   |                     |
+    |        JTBPY-5 |               |                   |                     |
     |           HP-6 |       28.5605 |                   |                     |
     |          PPY-6 |       27.0546 |                   |                     |
     |           OC-6 |      *0.9516* |                   |                     |
@@ -163,69 +184,73 @@ python3 cshm-cc.py combined.cif
 ```console
 python3 cshm-cc.py 1100756 -v -sxyz
 ```
-    COD: 1100756, M: Fe1, CN: 6, Ligand atoms: O1 O2 O5 O7 N1 N2 
+    Fe1 (1100756): CN = 6, min dist. = 1.9321 Å, max dist. = 2.1414 Å  
+    
+    COD: 1100756, M: Fe1, CN: 6, Ligand atoms: O1  O2  O5  O7  N1  N2  
     
     |  **Atoms**  |   **Bond length /Å** |
     |-------------|----------------------|
-    |   Fe1-O2    |           1.9321(17) |
-    |   Fe1-O1    |           1.9393(18) |
-    |   Fe1-O7    |             1.998(2) |
-    |   Fe1-O5    |           2.0937(18) |
-    |   Fe1-N1    |             2.115(2) |
-    |   Fe1-N2    |             2.141(2) | 
+    |   Fe1-O1    |               1.9394 |
+    |   Fe1-O2    |               1.9321 |
+    |   Fe1-O5    |               2.0936 |
+    |   Fe1-O7    |               1.9975 |
+    |   Fe1-N1    |               2.1147 |
+    |   Fe1-N2    |               2.1414 | 
     
     |  **Atoms**  |   **Angle /°** |
     |-------------|----------------|
-    |  O2-Fe1-O1  |       92.13(7) |
-    |  O2-Fe1-O7  |       98.79(8) |
-    |  O1-Fe1-O7  |       92.81(8) |
-    |  O2-Fe1-O5  |       93.54(7) |
-    |  O1-Fe1-O5  |      174.31(7) |
-    |  O7-Fe1-O5  |       86.65(8) |
-    |  O2-Fe1-N1  |      167.89(8) |
-    |  O1-Fe1-N1  |       85.28(8) |
-    |  O7-Fe1-N1  |       93.16(9) |
-    |  O5-Fe1-N1  |       89.09(8) |
-    |  O2-Fe1-N2  |       84.63(8) |
-    |  O1-Fe1-N2  |       96.52(8) |
-    |  O7-Fe1-N2  |      169.95(8) |
-    |  O5-Fe1-N2  |       83.70(8) |
-    |  N1-Fe1-N2  |       83.92(9) | 
+    |  O1-Fe1-O2  |          92.13 |
+    |  O1-Fe1-O5  |         174.32 |
+    |  O1-Fe1-O7  |          92.81 |
+    |  O1-Fe1-N1  |          85.28 |
+    |  O1-Fe1-N2  |          96.52 |
+    |  O2-Fe1-O5  |          93.54 |
+    |  O2-Fe1-O7  |          98.78 |
+    |  O2-Fe1-N1  |         167.91 |
+    |  O2-Fe1-N2  |          84.63 |
+    |  O5-Fe1-O7  |          86.65 |
+    |  O5-Fe1-N1  |          89.10 |
+    |  O5-Fe1-N2  |          83.70 |
+    |  O7-Fe1-N1  |          93.15 |
+    |  O7-Fe1-N2  |         169.95 |
+    |  N1-Fe1-N2  |          83.93 | 
     
+    Fe2 (1100756): CN = 6, min dist. = 1.9019 Å, max dist. = 2.1397 Å  
     
-    COD: 1100756, M: Fe2, CN: 6, Ligand atoms: O6 O3 N6 O4 N3 N4 
+    COD: 1100756, M: Fe2, CN: 6, Ligand atoms: O6  O3  N6  O4  N3  N4  
     
     |  **Atoms**  |   **Bond length /Å** |
     |-------------|----------------------|
-    |   Fe2-O3    |           1.9020(17) |
-    |   Fe2-O4    |           1.9099(18) |
-    |   Fe2-N3    |             2.104(2) |
-    |   Fe2-N4    |             2.126(2) |
-    |   Fe2-O6    |           2.1298(18) |
-    |   Fe2-N6    |             2.140(2) | 
+    |   Fe2-O6    |               2.1298 |
+    |   Fe2-O3    |               1.9019 |
+    |   Fe2-N6    |               2.1397 |
+    |   Fe2-O4    |               1.9100 |
+    |   Fe2-N3    |               2.1042 |
+    |   Fe2-N4    |               2.1254 | 
     
     |  **Atoms**  |   **Angle /°** |
     |-------------|----------------|
-    |  O3-Fe2-O4  |       95.39(7) |
-    |  O3-Fe2-N3  |       87.08(8) |
-    |  O4-Fe2-N3  |      106.30(8) |
-    |  O3-Fe2-N4  |      172.34(8) |
-    |  O4-Fe2-N4  |       85.80(8) |
-    |  N3-Fe2-N4  |       85.33(8) |
-    |  O3-Fe2-O6  |       93.73(7) |
-    |  O4-Fe2-O6  |      164.47(7) |
-    |  N3-Fe2-O6  |       86.67(7) |
-    |  N4-Fe2-O6  |       86.82(7) |
-    |  O3-Fe2-N6  |       90.19(8) |
-    |  O4-Fe2-N6  |       92.14(8) |
-    |  N3-Fe2-N6  |      161.53(8) |
-    |  N4-Fe2-N6  |       97.33(8) |
-    |  O6-Fe2-N6  |       75.28(7) | 
+    |  O6-Fe2-O3  |          93.74 |
+    |  O6-Fe2-N6  |          75.28 |
+    |  O6-Fe2-O4  |         164.47 |
+    |  O6-Fe2-N3  |          86.67 |
+    |  O6-Fe2-N4  |          86.82 |
+    |  O3-Fe2-N6  |          90.19 |
+    |  O3-Fe2-O4  |          95.39 |
+    |  O3-Fe2-N3  |          87.07 |
+    |  O3-Fe2-N4  |         172.35 |
+    |  N6-Fe2-O4  |          92.13 |
+    |  N6-Fe2-N3  |         161.53 |
+    |  N6-Fe2-N4  |          97.32 |
+    |  O4-Fe2-N3  |         106.30 |
+    |  O4-Fe2-N4  |          85.80 |
+    |  N3-Fe2-N4  |          85.35 | 
+    
     
     |   **compound** |   **Fe1 (1100756)** |   **Fe2 (1100756)** |
     |----------------|---------------------|---------------------|
     |             CN |                   6 |                   6 |
-    |              O |              6.1891 |              9.2875 |
+    |              O |              6.1844 |              9.2859 |
     |          V /Å³ |             11.1317 |             11.2190 |
     |                |                     |                     |
     |           HP-6 |             32.8092 |             32.9834 |
@@ -233,7 +258,7 @@ python3 cshm-cc.py 1100756 -v -sxyz
     |           OC-6 |            *0.4960* |            *1.3337* |
     |          TPR-6 |             13.2723 |             10.3584 |
     |         JPPY-6 |             29.1733 |             27.1195 |
-    
+        
     XYZ file saved to 1100756.xyz
 
   XYZ file content:
@@ -256,7 +281,7 @@ python3 cshm-cc.py 1100756 -v -sxyz
     O   0.31465477  1.78925625 -0.58946897
     N   1.41570551 -0.38239341  1.50903978
     N   1.54651075 -0.55071842 -1.34996022
-    
+ 
 ## References
 If you use τ<sub>4</sub>, τ<sub>5</sub>, the *O* index or CShM to describe the coordination geometry of your compounds, please cite one or more of the following articles:
 
