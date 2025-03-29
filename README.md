@@ -281,7 +281,71 @@ python3 cshm-cc.py 1100756 -v -sxyz
     O   0.31465477  1.78925625 -0.58946897
     N   1.41570551 -0.38239341  1.50903978
     N   1.54651075 -0.55071842 -1.34996022
- 
+
+### Example 3
+
+```console
+python3 cshm-cc.py 1100600 -p
+```
+    Cd1 (1100600): Warning! Cd2 has been excluded from coordinating atoms.  
+    Cd1 (1100600): Warning! Cd4 has been excluded from coordinating atoms.  
+    Cd1 (1100600): Warning! Cd3 has been excluded from coordinating atoms.  
+    Cd1 (1100600): CN = 4, min dist. = 2.2531 Å, max dist. = 2.3998 Å  
+    Cd2 (1100600): Warning! Cd4 has been excluded from coordinating atoms.  
+    Cd2 (1100600): Warning! Cd1 has been excluded from coordinating atoms.  
+    Cd2 (1100600): Warning! Cd3 has been excluded from coordinating atoms.  
+    Cd2 (1100600): CN = 4, min dist. = 2.2682 Å, max dist. = 2.3968 Å  
+    Cd3 (1100600): Warning! Cd2 has been excluded from coordinating atoms.  
+    Cd3 (1100600): Warning! Cd4 has been excluded from coordinating atoms.  
+    Cd3 (1100600): Warning! Cd1 has been excluded from coordinating atoms.  
+    Cd3 (1100600): CN = 4, min dist. = 2.2747 Å, max dist. = 2.3846 Å  
+    Cd4 (1100600): Warning! Cd2 has been excluded from coordinating atoms.  
+    Cd4 (1100600): Warning! Cd1 has been excluded from coordinating atoms.  
+    Cd4 (1100600): Warning! Cd3 has been excluded from coordinating atoms.  
+    Cd4 (1100600): CN = 4, min dist. = 2.2334 Å, max dist. = 2.4005 Å  
+    
+    |   **compound** |   **Cd1 (1100600)** |   **Cd2 (1100600)** |   **Cd3 (1100600)** |   **Cd4 (1100600)** |
+    |----------------|---------------------|---------------------|---------------------|---------------------|
+    |             CN |                   4 |                   4 |                   4 |                   4 |
+    |             τ₄ |              0.7378 |              0.7348 |              0.7131 |              0.7341 |
+    |            τ₄' |              0.7273 |              0.7064 |              0.6972 |              0.7251 |
+    |          V /Å³ |              5.5171 |              5.5015 |              5.5687 |              5.4022 |
+    |                |                     |                     |                     |                     |
+    |           SP-4 |             33.2281 |             31.6257 |             33.2891 |             33.0562 |
+    |            T-4 |            *3.6158* |            *3.7698* |            *3.8506* |            *3.5041* |
+    |           SS-4 |              7.5277 |              6.5626 |              7.2498 |              7.3999 |
+    |        vTBPY-4 |              4.4485 |              4.5457 |              4.3667 |              4.1798 |
+    
+    Cd1 (1100600) CN = 4:  
+    T-4    : ░░░░ 3.62  
+    vTBPY-4: ░░░░░ 4.45  
+    SS-4   : ░░░░░░░░░ 7.53  
+    SP-4   : ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 33.23  
+    
+    Cd2 (1100600) CN = 4:  
+    T-4    : ░░░░ 3.77  
+    vTBPY-4: ░░░░░ 4.55  
+    SS-4   : ░░░░░░░ 6.56  
+    SP-4   : ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 31.63  
+    
+    Cd3 (1100600) CN = 4:  
+    T-4    : ░░░░ 3.85  
+    vTBPY-4: ░░░░░ 4.37  
+    SS-4   : ░░░░░░░░ 7.25  
+    SP-4   : ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 33.29  
+    
+    Cd4 (1100600) CN = 4:  
+    T-4    : ░░░░ 3.50  
+    vTBPY-4: ░░░░░ 4.18  
+    SS-4   : ░░░░░░░░ 7.40  
+    SP-4   : ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 33.06 
+
+Or color bar graphs (which cannot be displayed here) using:
+
+```console
+python3 cshm-cc.py 1100600 -pc
+```
+
 ## References
 If you use τ<sub>4</sub>, τ<sub>5</sub>, the *O* index or CShM to describe the coordination geometry of your compounds, please cite one or more of the following articles:
 
