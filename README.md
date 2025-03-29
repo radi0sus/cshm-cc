@@ -34,7 +34,8 @@ For local CIFs with one or more entries start the script with:
 ```console
 python3 cshm-cc.py example.cif
 ```
-The following output will be printed:
+The following output will be printed: 
+
     Fe1 (example): CN = 5, min dist. = 1.9799 Å, max dist. = 2.3664 Å 
  
     |   **compound** |   **Fe1 (example)**     |   <- Central atom (CIF entry) 
@@ -53,7 +54,8 @@ Or to retrieve structural data from the COD (Crystallography Open Database), for
 ```console
 python3 cshm-cc.py 4110517
 ```
-The following output will be printed:
+The following output will be printed: 
+
     Fe1 (4110517): CN = 6, min dist. = 1.8997 Å, max dist. = 1.9875 Å  
     Co1 (4110517): Warning! Co1 has been excluded from coordinating atoms.  
     Co1 (4110517): CN = 6, min dist. = 2.0824 Å, max dist. = 2.1582 Å 
