@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # 
 import numpy as np                                    # all sort of math
+from itertools import permutations                    # permutations of vertices for CShM
 from scipy.linalg import svd                          # SVD for CShM
 from scipy.optimize import linear_sum_assignment      # Hungarian algorithm
 from scipy.stats import special_ortho_group           # more evenly distributed 
@@ -84,7 +85,7 @@ def calc_cshm_exact(coordinates, ideal_shape):
         
     return min_cshm * 100
 
-def calc_cshm_fast(coordinates, ideal_shape, num_trials = 128):
+def calc_cshm_fast(coordinates, ideal_shape, num_trials):
     input_structure = normalize_structure(coordinates)
     ideal_sq_norms = np.sum(ideal_shape**2)
     
@@ -129,28 +130,6 @@ def calc_cshm_fast(coordinates, ideal_shape, num_trials = 128):
         min_cshm = min(min_cshm, cshm)
 
     return min_cshm * 100
-    
-def calc_cshm_exact(coordinates, ideal_shape, dummy):
-    # calculation the continuous shape measures (CShM) parameter for a given structure
-    # from the c++ code with some help of AI
-    # https://github.com/continuous-symmetry-measure/shape
-    # all permutations considered
-    permut_list = list(permutations(range(len(coordinates))))
-    ideal_sq_norms = np.sum(ideal_shape**2)
-    input_structure = normalize_structure(coordinates)
-    min_cshm = float('inf')
-    for permuted_ideal in map(lambda p: ideal_shape[list(p)], permut_list):
-        H = np.dot(input_structure.T, permuted_ideal)
-        U, _, Vt = svd(H)
-        R = np.dot(Vt.T, U.T)
-
-        rotated_ideal = np.dot(permuted_ideal, R)
-        scale = np.sum(input_structure * rotated_ideal) / ideal_sq_norms
-        cshm = np.mean(np.sum((input_structure - scale * rotated_ideal)**2, axis=1))
-        
-        min_cshm = min(min_cshm, cshm)
-        
-    return min_cshm * 100
 
 # test coordinates
 coordinates = np.array([
@@ -164,11 +143,11 @@ coordinates = np.array([
 ])
 
 # first, calculate the values with the exact approach
-OC6_ex = calc_cshm_fast(coordinates, IDEAL_OC6)
-TPR6_ex = calc_cshm_fast(coordinates, IDEAL_TPR6)
-JPP6_ex = calc_cshm_fast(coordinates, IDEAL_JPPY6)
-PPY6_ex = calc_cshm_fast(coordinates, IDEAL_PPY6)
-HP6_ex = calc_cshm_fast(coordinates, IDEAL_HP6)
+OC6_ex = calc_cshm_exact(coordinates, IDEAL_OC6)
+TPR6_ex = calc_cshm_exact(coordinates, IDEAL_TPR6)
+JPP6_ex = calc_cshm_exact(coordinates, IDEAL_JPPY6)
+PPY6_ex = calc_cshm_exact(coordinates, IDEAL_PPY6)
+HP6_ex = calc_cshm_exact(coordinates, IDEAL_HP6)
 
 # Store values for all runs and trials
 oc6_values = []
@@ -208,11 +187,11 @@ constant_values = [OC6_ex, TPR6_ex, JPP6_ex, PPY6_ex, HP6_ex]
 for value, color in zip(constant_values, colors):
     plt.axhline(y=value, color=color, linestyle='--', linewidth=1)
 
-# Set the right y-axis ticks at the levels of the constant lines
+# set the right y-axis ticks at the levels of the constant lines
 plt.yticks(constant_values)
 
 plt.xlim(0, 101)
-plt.xticks(np.arange(0, 101, 10))  # Set x-ticks every 10
+plt.xticks(np.arange(0, 101, 10))  # set x-ticks every 10
 plt.xlabel('Number of Trials')
 plt.grid(True, which='both', axis='x', linestyle='dashed')
 plt.ylabel('CShM ')
