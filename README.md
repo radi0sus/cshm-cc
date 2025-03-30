@@ -126,7 +126,6 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 ## Known Issues
 - In rare cases, the `gemmi` module does not return the correct coordinates for symmetry-equivalent positions. When this happens, the script exits.
 - If problems arise, the only available option is to reduce the number of bonds considered using the `-d` option.
-- The script can only remove atoms from the coordination sphere, not add them. Ensure that the connectivity list is appropriate.
 - The CShM method is rewritten from the [C++ code](https://github.com/continuous-symmetry-measure/shape) and may still contain errors.
 
 ## Regarding the number of trials
