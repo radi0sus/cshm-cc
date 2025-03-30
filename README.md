@@ -346,6 +346,9 @@ Or color bar graphs (which cannot be displayed here) using:
 ```console
 python3 cshm-cc.py 1100600 -pc
 ```
+### Example 4
+
+<img src='examples\show-use.gif' alt='Example 4' width=1024 align='center'>
 
 ## References
 If you use τ<sub>4</sub>, τ<sub>5</sub>, the *O* index or CShM to describe the coordination geometry of your compounds, please cite one or more of the following articles:
