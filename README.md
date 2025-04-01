@@ -137,7 +137,7 @@ To determine the optimal number of trials, 100 runs were conducted, each with tr
 The values for the global minimum solutions are displayed on the y-axis. Except for $\textcolor{blue}{\textrm{OC-6}}$ (the lowest CShM value) and $\textcolor{orange}{\textrm{HP-6}}$, the algorithm occasionally converges to local minima, which are higher than the global minimum. As seen from the color intensity of the points, the tendency to optimize local minima decreases significantly after approximately 20 trials and disappears completely after 40 trials. Thus, a "number of trials" of around 100 should be sufficient.
 
 ## Polyhedra and Shape Reference
-<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'><img src='examples\all_polyhedra5.png' alt='Polyhedra and Shape Reference' width=800 align='center'></a>
+<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'><img src='examples\all_polyhedra-6.png' alt='Polyhedra and Shape Reference' width=800 align='center'></a>
   
 ## Examples
 
