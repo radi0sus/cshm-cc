@@ -19,6 +19,8 @@ from scipy.stats import special_ortho_group           # more evenly distributed
 from collections import Counter                       # finding duplicates
 from tabulate import tabulate                         # nice tables
 
+os.system("")                                         # for cmd.exe ANSI colors
+
 # this will be considered as central atom
 tm = [
     "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn",
