@@ -529,7 +529,7 @@ def get_atm_prop(doc, atom, arg_dist = 0.0, inc_hydro = True, enlarge_bond = 10.
             l_radius = covalent_radii_max[el_label.name]
         except KeyError:
             print(f'{site.label} ({doc.name}): Warning! {el_label.name} is not in the '
-                   'list of elements. Exit.') 
+                   'list of elements. Exit.  ') 
             sys.exit(1)
         # bond length: radius(ligand atom) + radius(central atom) + x% (10% default)
         bond = (l_radius + ca_radius) + (enlarge_bond/100.0)*(l_radius + ca_radius) 
@@ -566,7 +566,8 @@ def get_atm_prop(doc, atom, arg_dist = 0.0, inc_hydro = True, enlarge_bond = 10.
                     # usually for symmetry equivalent and not symmetry equivalent central 
                     # atoms
                     print(f'{site.label} ({doc.name}): Warning! {label} '
-                          f'has been excluded from coordinating atoms.  ')
+                          f'({image.symmetry_code(True)}) has been excluded '
+                           'from coordinating atoms.  ')
     # print max and min distances and CN, CIF name and central atom name
     if max_dist and min_dist:
         print(f'{site.label} ({doc.name}): CN = {len(atoms_prop)-1}, '
@@ -731,7 +732,7 @@ def get_cshm(calc_cshm, coordinates, cn, cif, metal, num_trials):
         shape_cn6 = highlight_min_cshm(shape_cn6_values)
         
     else:
-        print(f'{metal} ({cif}): Warning! CN not supported for CShM.  ')
+        print(f'{metal} ({cif}): Warning! CN = {cn} is not supported for CShM.  ')
         
     return shape_cn2 + shape_cn3 + shape_cn4 + shape_cn5 + shape_cn6
 
@@ -851,6 +852,13 @@ def calc_geom(angle_table, cn, cif, metal):
         tau4impr = None
         tau5 = None
         O = calc_octahedricity(angles, cif, metal)
+    elif cn > 6:
+        tau4 = None
+        tau4impr = None
+        tau5 = None
+        O = None
+        # if CN > 6
+        print(f'{metal} ({cif}): Warning! CN = {cn} is not supported for geometry indices.')
     else:
         tau4 = None
         tau4impr = None
