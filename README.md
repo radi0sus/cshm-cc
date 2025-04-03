@@ -57,7 +57,7 @@ python3 cshm-cc.py 4110517
 The following output will be printed: 
 
     Fe1 (4110517): CN = 6, min dist. = 1.8997 Å, max dist. = 1.9875 Å  
-    Co1 (4110517): Warning! Co1 has been excluded from coordinating atoms.  
+    Co1 (4110517): Warning! Co1 (1_655) has been excluded from coordinating atoms.  
     Co1 (4110517): CN = 6, min dist. = 2.0824 Å, max dist. = 2.1582 Å 
 
     |   **compound** |   **Fe1 (4110517)** |   **Co1 (4110517)** |   <- Central atoms (COD ID)  
@@ -149,7 +149,7 @@ python3 cshm-cc.py combined.cif
     Ru1 (I): CN = 6, min dist. = 2.0645 Å, max dist. = 2.0656 Å  
     Cu1 (anko4): CN = 3, min dist. = 1.8636 Å, max dist. = 1.9991 Å  
     7718332: Warning! No metal atoms or '_atom_site_type_symbol' is missing.  
-    Fe1 (av12_25): Warning! Fe1 has been excluded from coordinating atoms.  
+    Fe1 (av12_25): Warning! Fe1 (2_666) has been excluded from coordinating atoms.  
     Fe1 (av12_25): CN = 4, min dist. = 1.9890 Å, max dist. = 2.2038 Å  
     
     |   **compound** |   **Ru1 (I)** |   **Cu1 (anko4)** |   **Fe1 (av12_25)** |
@@ -288,22 +288,22 @@ python3 cshm-cc.py 1100756 -v -sxyz
 ```console
 python3 cshm-cc.py 1100600 -p
 ```
-    Cd1 (1100600): Warning! Cd2 has been excluded from coordinating atoms.  
-    Cd1 (1100600): Warning! Cd4 has been excluded from coordinating atoms.  
-    Cd1 (1100600): Warning! Cd3 has been excluded from coordinating atoms.  
+    Cd1 (1100600): Warning! Cd2 (1_555) has been excluded from coordinating atoms.  
+    Cd1 (1100600): Warning! Cd4 (1_555) has been excluded from coordinating atoms.  
+    Cd1 (1100600): Warning! Cd3 (1_555) has been excluded from coordinating atoms.  
     Cd1 (1100600): CN = 4, min dist. = 2.2531 Å, max dist. = 2.3998 Å  
-    Cd2 (1100600): Warning! Cd4 has been excluded from coordinating atoms.  
-    Cd2 (1100600): Warning! Cd1 has been excluded from coordinating atoms.  
-    Cd2 (1100600): Warning! Cd3 has been excluded from coordinating atoms.  
+    Cd2 (1100600): Warning! Cd4 (1_555) has been excluded from coordinating atoms.  
+    Cd2 (1100600): Warning! Cd1 (1_555) has been excluded from coordinating atoms.  
+    Cd2 (1100600): Warning! Cd3 (1_555) has been excluded from coordinating atoms.  
     Cd2 (1100600): CN = 4, min dist. = 2.2682 Å, max dist. = 2.3968 Å  
-    Cd3 (1100600): Warning! Cd2 has been excluded from coordinating atoms.  
-    Cd3 (1100600): Warning! Cd4 has been excluded from coordinating atoms.  
-    Cd3 (1100600): Warning! Cd1 has been excluded from coordinating atoms.  
+    Cd3 (1100600): Warning! Cd2 (1_555) has been excluded from coordinating atoms.  
+    Cd3 (1100600): Warning! Cd4 (1_555) has been excluded from coordinating atoms.  
+    Cd3 (1100600): Warning! Cd1 (1_555) has been excluded from coordinating atoms.  
     Cd3 (1100600): CN = 4, min dist. = 2.2747 Å, max dist. = 2.3846 Å  
-    Cd4 (1100600): Warning! Cd2 has been excluded from coordinating atoms.  
-    Cd4 (1100600): Warning! Cd1 has been excluded from coordinating atoms.  
-    Cd4 (1100600): Warning! Cd3 has been excluded from coordinating atoms.  
-    Cd4 (1100600): CN = 4, min dist. = 2.2334 Å, max dist. = 2.4005 Å  
+    Cd4 (1100600): Warning! Cd2 (1_555) has been excluded from coordinating atoms.  
+    Cd4 (1100600): Warning! Cd1 (1_555) has been excluded from coordinating atoms.  
+    Cd4 (1100600): Warning! Cd3 (1_555) has been excluded from coordinating atoms.  
+    Cd4 (1100600): CN = 4, min dist. = 2.2334 Å, max dist. = 2.4005 Å    
     
     |   **compound** |   **Cd1 (1100600)** |   **Cd2 (1100600)** |   **Cd3 (1100600)** |   **Cd4 (1100600)** |
     |----------------|---------------------|---------------------|---------------------|---------------------|
