@@ -97,7 +97,7 @@ covalent_radii_jmol = {
 # max radii for each element from Alvarez, Shelx and Jmol 
 # used a default
 covalent_radii_max = {
-    'H': 0.32, 'He': 1.50, 'Li': 1.52, 'Be': 1.11, 'B': 0.84, 'C': 0.77, 
+    'H': 0.32, 'D': 0.32, 'He': 1.50, 'Li': 1.52, 'Be': 1.11, 'B': 0.84, 'C': 0.77, 
     'N': 0.71, 'O': 0.68, 'F': 0.64, 'Ne': 1.50, 'Na': 1.86, 'Mg': 1.60, 
     'Al': 1.35, 'Si': 1.20, 'P': 1.10, 'S': 1.05, 'Cl': 1.02, 'Ar': 1.57, 
     'K': 2.27, 'Ca': 1.97, 'Sc': 1.70, 'Ti': 1.60, 'V': 1.53, 'Cr': 1.39, 
@@ -524,7 +524,13 @@ def get_atm_prop(doc, atom, arg_dist = 0.0, inc_hydro = True, enlarge_bond = 10.
                                  real_pos.y - cart_coord_ca.y,
                                  real_pos.z - cart_coord_ca.z])
         # get the covalent radius of the ligand atom from dict of radii
-        l_radius = covalent_radii_max[el_label.name]
+        # exit if element is not in dict
+        try:
+            l_radius = covalent_radii_max[el_label.name]
+        except KeyError:
+            print(f'{site.label} ({doc.name}): Warning! {el_label.name} is not in the '
+                   'list of elements. Exit.') 
+            sys.exit(1)
         # bond length: radius(ligand atom) + radius(central atom) + x% (10% default)
         bond = (l_radius + ca_radius) + (enlarge_bond/100.0)*(l_radius + ca_radius) 
         # distance of the central atom to the ligand atom from gemmi 
@@ -725,7 +731,7 @@ def get_cshm(calc_cshm, coordinates, cn, cif, metal, num_trials):
         shape_cn6 = highlight_min_cshm(shape_cn6_values)
         
     else:
-        print(f'{metal} ({cif}): Warning! CN not supported.  ')
+        print(f'{metal} ({cif}): Warning! CN not supported for CShM.  ')
         
     return shape_cn2 + shape_cn3 + shape_cn4 + shape_cn5 + shape_cn6
 
