@@ -345,11 +345,14 @@ python3 cshm-cc.py 1100600 -p
     SS-4   : ░░░░░░░░ 7.40  
     SP-4   : ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 33.06 
 
-Or color bar graphs (which cannot be displayed here) using:
+Or color bar graphs using:
 
 ```console
 python3 cshm-cc.py 1100600 -pc
 ```
+    
+<img src='examples\col_bars_1.png' width='450' alt='Color bar graphs' align='center'>
+
 ### Example 4
 
 <img src='examples\show-use.gif' alt='Example 4' width=1024 align='center'>
