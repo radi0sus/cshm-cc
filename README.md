@@ -351,7 +351,7 @@ Or color bar graphs using:
 python3 cshm-cc.py 1100600 -pc
 ```
     
-<img src='examples\col_bars_1.png' width='450' alt='Color bar graphs' align='center'>
+<img src='examples\color_bars_2.png' width='460' alt='Color bar graphs' align='center'>
 
 ### Example 4
 
