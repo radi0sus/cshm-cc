@@ -40,7 +40,7 @@ The following output will be printed:
      ↓                ↓
     Fe1 (example): CN = 5, min dist. = 1.9799 Å, max dist. = 2.3664 Å 
            ↑                  ↑                     ↑
-    CIF name or COD ID     minimum distance     maximum distance         
+    CIF entry or COD ID    minimum distance      maximum distance         
     
     |   **compound** |   **Fe1 (example)**     |  ← Central atom (CIF entry) 
     |----------------|-------------------------|
