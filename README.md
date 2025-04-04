@@ -7,19 +7,21 @@ This script calculates the Continuous Shape Measures (CShM) and geometry indices
 
 #### Equations and values for the geometry indices τ₄, τ₄', τ₅, and *O*:
 
-$\tau_4 = \frac{360°-(\alpha+\beta)}{141°}$ 
+$\boldsymbol{\tau_4} = \frac{360°-(\alpha+\beta)}{141°}$ 
 
 Square planar geometry: $\tau_4 = 0$; Tetrahedral geometry:  $\tau_4 = 1$; Seesaw geometry: $\tau_4 \approx 0.43$
 
-$\tau'_4 = \frac{\beta-\alpha}{250.5°}+\frac{180-\beta}{70.5°}$
+$\boldsymbol{\tau'_4} = \frac{\beta-\alpha}{250.5°}+\frac{180-\beta}{70.5°}$
 
 Square planar geometry: $\tau'_4 = 0$; Tetrahedral geometry:  $\tau'_4 = 1$; Seesaw geometry: $\tau'_4 \approx 0.24$
 
-$\tau_5 = \frac{\beta-\alpha}{60°}$
+$\boldsymbol{\tau_5} = \frac{\beta-\alpha}{60°}$
 
 Square pyramidal geometry: $\tau_5 = 0$; Trigonal bipyramidal geometry: $\tau_5 = 1$
 
-$O = \sqrt{\frac{1}{15}\sum_{i=1}^{15}(\hat{\theta_i} - \theta)^2}$
+$\alpha$ and $\beta$ are the two largest angles, with $\beta > \alpha$.  
+
+$\boldsymbol{O} = \sqrt{\frac{1}{15}\sum_{i=1}^{15}(\hat{\theta_i} - \theta)^2}$
 
 $\hat{\theta_i}$ = 180° for *trans* X-M-X angles and 90° for *cis* X-M-X angles\
 $\theta$ = experimental X-M-X angles
