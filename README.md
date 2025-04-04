@@ -36,7 +36,7 @@ python3 cshm-cc.py example.cif
 ```
 The following output will be printed: 
 
-    central atom   coordiantion number
+    central atom   coordination number
      ↓                ↓
     Fe1 (example): CN = 5, min dist. = 1.9799 Å, max dist. = 2.3664 Å 
            ↑                  ↑                     ↑
