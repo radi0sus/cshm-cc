@@ -36,23 +36,23 @@ python3 cshm-cc.py example.cif
 ```
 The following output will be printed: 
 
-    central atom   coordination number
+    𝗰𝗲𝗻𝘁𝗿𝗮𝗹 𝗮𝘁𝗼𝗺   𝗰𝗼𝗼𝗿𝗱𝗶𝗻𝗮𝘁𝗶𝗼𝗻 𝗻𝘂𝗺𝗯𝗲𝗿 
      ↓                ↓
     Fe1 (example): CN = 5, min dist. = 1.9799 Å, max dist. = 2.3664 Å 
            ↑                  ↑                     ↑
-    CIF entry or COD ID    minimum distance      maximum distance (to central atom)       
+    𝗖𝗜𝗙 𝗲𝗻𝘁𝗿𝘆 𝗼𝗿 𝗖𝗢𝗗 𝗜𝗗       𝗺𝗶𝗻𝗶𝗺𝘂𝗺 𝗱𝗶𝘀𝘁𝗮𝗻𝗰𝗲        𝗺𝗮𝘅𝗶𝗺𝘂𝗺 𝗱𝗶𝘀𝘁𝗮𝗻𝗰𝗲 (𝘁𝗼 𝗰𝗲𝗻𝘁𝗿𝗮𝗹 𝗮𝘁𝗼𝗺)       
     
-    |   **compound** |   **Fe1 (example)**     |  ← Central atom (CIF entry) 
+    |   **compound** |   **Fe1 (example)**     |  ← 𝗖𝗲𝗻𝘁𝗿𝗮𝗹 𝗮𝘁𝗼𝗺 (𝗖𝗜𝗙 𝗲𝗻𝘁𝗿𝘆) 
     |----------------|-------------------------|
-    |             CN |                       5 |  ← Coordination number (CN)
-    |             τ₅ |                  0.3053 |  ← Geometry index (suitable for CN = 5)
-    |          V /Å³ |                  7.2032 |  ← Polyhedral volume
+    |             CN |                       5 |  ← 𝗖𝗼𝗼𝗿𝗱𝗶𝗻𝗮𝘁𝗶𝗼𝗻 𝗻𝘂𝗺𝗯𝗲𝗿 (𝗖𝗡)
+    |             τ₅ |                  0.3053 |  ← 𝗚𝗲𝗼𝗺𝗲𝘁𝗿𝘆 𝗶𝗻𝗱𝗲𝘅 (𝘀𝘂𝗶𝘁𝗮𝗯𝗹𝗲 𝗳𝗼𝗿 𝗖𝗡 = 𝟱)
+    |          V /Å³ |                  7.2032 |  ← 𝗣𝗼𝗹𝘆𝗵𝗲𝗱𝗿𝗮𝗹 𝘃𝗼𝗹𝘂𝗺𝗲
     |                |                         | 
-    |           PP-5 |                 31.2864 |  ← CShM (suitable for CN = 5)
-    |          vOC-5 |                  2.1704 |  ← CShM (suitable for CN = 5)
-    |         TBPY-5 |                  3.1110 |  ← CShM (suitable for CN = 5)
-    |          SPY-5 |                *0.9603* |  ← CShM (lowest value highlighted)
-    |        JTBPY-5 |                  6.3056 |  ← CShM (suitable for CN = 5)
+    |           PP-5 |                 31.2864 |  ← 𝗖𝗦𝗵𝗠 (𝘀𝘂𝗶𝘁𝗮𝗯𝗹𝗲 𝗳𝗼𝗿 𝗖𝗡 = 𝟱)
+    |          vOC-5 |                  2.1704 |  ← 𝗖𝗦𝗵𝗠 (𝘀𝘂𝗶𝘁𝗮𝗯𝗹𝗲 𝗳𝗼𝗿 𝗖𝗡 = 𝟱)
+    |         TBPY-5 |                  3.1110 |  ← 𝗖𝗦𝗵𝗠 (𝘀𝘂𝗶𝘁𝗮𝗯𝗹𝗲 𝗳𝗼𝗿 𝗖𝗡 = 𝟱)
+    |          SPY-5 |                *0.9603* |  ← 𝗖𝗦𝗵𝗠 (𝗹𝗼𝘄𝗲𝘀𝘁 𝘃𝗮𝗹𝘂𝗲 𝗵𝗶𝗴𝗵𝗹𝗶𝗴𝗵𝘁𝗲𝗱)
+    |        JTBPY-5 |                  6.3056 |  ← 𝗖𝗦𝗵𝗠 (𝘀𝘂𝗶𝘁𝗮𝗯𝗹𝗲 𝗳𝗼𝗿 𝗖𝗡 = 𝟱)
 
 Or to retrieve structural data from the COD (Crystallography Open Database), for example:
 ```console
@@ -64,17 +64,17 @@ The following output will be printed:
     Co1 (4110517): Warning! Co1 (1_655) has been excluded from coordinating atoms.  
     Co1 (4110517): CN = 6, min dist. = 2.0824 Å, max dist. = 2.1582 Å 
 
-    |   **compound** |   **Fe1 (4110517)** |   **Co1 (4110517)** |  ← Central atoms (COD ID)  
+    |   **compound** |   **Fe1 (4110517)** |   **Co1 (4110517)** |  ← 𝗖𝗲𝗻𝘁𝗿𝗮𝗹 𝗮𝘁𝗼𝗺𝘀 (𝗖𝗢𝗗 𝗜𝗗) 
     |----------------|---------------------|---------------------|
-    |             CN |                   6 |                   6 |  ← Coordination numbers (CN)
-    |              O |              5.1303 |              0.1262 |  ← Geometry indices (suitable for CN = 6)
-    |          V /Å³ |              9.7103 |             12.5312 |  ← Polyhedral volumes
+    |             CN |                   6 |                   6 |  ← 𝗖𝗼𝗼𝗿𝗱𝗶𝗻𝗮𝘁𝗶𝗼𝗻 𝗻𝘂𝗺𝗯𝗲𝗿𝘀 (𝗖𝗡)
+    |              O |              5.1303 |              0.1262 |  ← 𝗚𝗲𝗼𝗺𝗲𝘁𝗿𝘆 𝗶𝗻𝗱𝗶𝗰𝗲𝘀 (𝘀𝘂𝗶𝘁𝗮𝗯𝗹𝗲 𝗳𝗼𝗿 𝗖𝗡 = 𝟲)
+    |          V /Å³ |              9.7103 |             12.5312 |  ← 𝗣𝗼𝗹𝘆𝗵𝗲𝗱𝗿𝗮𝗹 𝘃𝗼𝗹𝘂𝗺𝗲
     |                |                     |                     |
-    |           HP-6 |             30.9116 |             33.2437 |  ← CShM (suitable for CN = 6)
-    |          PPY-6 |             26.5838 |             30.2095 |  ← CShM (suitable for CN = 6)
-    |           OC-6 |            *0.4782* |            *0.0261* |  ← CShM (lowest values highlighted)
-    |          TPR-6 |             14.1660 |             16.7105 |  ← CShM (suitable for CN = 6)
-    |         JPPY-6 |             30.0476 |             33.6764 |  ← CShM (suitable for CN = 6)
+    |           HP-6 |             30.9116 |             33.2437 |  ← 𝗖𝗦𝗵𝗠 (𝘀𝘂𝗶𝘁𝗮𝗯𝗹𝗲 𝗳𝗼𝗿 𝗖𝗡 = 𝟲)
+    |          PPY-6 |             26.5838 |             30.2095 |  ← 𝗖𝗦𝗵𝗠 (𝘀𝘂𝗶𝘁𝗮𝗯𝗹𝗲 𝗳𝗼𝗿 𝗖𝗡 = 𝟲)
+    |           OC-6 |            *0.4782* |            *0.0261* |  ← CShM 𝗖𝗦𝗵𝗠 (𝗹𝗼𝘄𝗲𝘀𝘁 𝘃𝗮𝗹𝘂𝗲 𝗵𝗶𝗴𝗵𝗹𝗶𝗴𝗵𝘁𝗲𝗱)
+    |          TPR-6 |             14.1660 |             16.7105 |  ← 𝗖𝗦𝗵𝗠 (𝘀𝘂𝗶𝘁𝗮𝗯𝗹𝗲 𝗳𝗼𝗿 𝗖𝗡 = 𝟲)
+    |         JPPY-6 |             30.0476 |             33.6764 |  ← 𝗖𝗦𝗵𝗠 (𝘀𝘂𝗶𝘁𝗮𝗯𝗹𝗲 𝗳𝗼𝗿 𝗖𝗡 = 𝟲)
 
 The central atom(s) or transition metal atom(s) and their coordination number(s) will be automatically determined, 
 and all related values will be calculated. There is no manual choice of atom(s); only a maximum bonding distance can be set (`-d` option).
