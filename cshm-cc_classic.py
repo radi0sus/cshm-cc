@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-# 
+#
+# README:
+# cshm-cc.py is recommended.
+# This classic script is still available as it offers a different approach:
+# It uses bond lengths and angles from the CIF file instead of calculating these values from coordinates.
+# However, this script will no longer receive bug fixes or updates.
+#
 import requests                                       # download COD.cif
 import tempfile                                       # temp dir for COD.cif download 
 import argparse                                       # argument parser
