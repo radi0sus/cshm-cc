@@ -25,7 +25,7 @@ os.system("")                                         # for cmd.exe ANSI colors
 tm = [
     "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn",
     "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd",
-    "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg"
+    "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", "Mg"
 ]
 
 # radii collection START #################################################################    
@@ -512,62 +512,68 @@ def get_atm_prop(doc, atom, arg_dist = 0.0, inc_hydro = True, enlarge_bond = 10.
                   'sym_op': symops[0],                   # sym op x,y,z
                   'pbc_shift': (0, 0, 0)}]               # shift 1, 1, 1 for 1+x, 1+y, 1+z
     # now the ligand atoms
-    for mark in marks:
+    unique_marks = list(dict.fromkeys(marks))
+    for mark in unique_marks:
         el_label = mark.to_site(st).element
         label = mark.to_site(st).label
-        idx = mark.image_idx
-        real_pos = st.cell.find_nearest_pbc_position(cart_coord_ca, mark.pos, 0)
-        # convert to NumPy array
-        real_pos_array = np.array([real_pos.x, real_pos.y, real_pos.z])  
-        # position relative to the central atom (ca)
-        relative_pos = np.array([real_pos.x - cart_coord_ca.x, 
+        #idx = mark.image_idx
+        fpos = st.cell.fractionalize(mark.pos)
+        for image in st.cell.find_nearest_pbc_images(site.fract, 4.0, fpos, 0):
+            real_pos_fract = st.cell.fract_image(image, fpos)
+            real_pos = st.cell.orthogonalize(real_pos_fract)
+           
+            #real_pos = st.cell.find_nearest_pbc_position(cart_coord_ca, mark.pos, 0)
+            # convert to NumPy array
+            real_pos_array = np.array([real_pos.x, real_pos.y, real_pos.z])  
+            # position relative to the central atom (ca)
+            relative_pos = np.array([real_pos.x - cart_coord_ca.x, 
                                  real_pos.y - cart_coord_ca.y,
                                  real_pos.z - cart_coord_ca.z])
-        # get the covalent radius of the ligand atom from dict of radii
-        # exit if element is not in dict
-        try:
-            l_radius = covalent_radii_max[el_label.name]
-        except KeyError:
-            print(f'{site.label} ({doc.name}): Warning! {el_label.name} is not in the '
-                   'list of elements. Exit.  ') 
-            sys.exit(1)
-        # bond length: radius(ligand atom) + radius(central atom) + x% (10% default)
-        bond = (l_radius + ca_radius) + (enlarge_bond/100.0)*(l_radius + ca_radius) 
-        # distance of the central atom to the ligand atom from gemmi 
-        distance = real_pos.dist(cart_coord_ca)
-        
-        if arg_dist:
-            # if args.dist, the d parameter is invoked, use this as bond length
-            bond = abs(arg_dist)
-        # all distances smaller than the bond length (which ist the sum of the radii)  
-        # are considered     
-        if distance < bond:
-            image = st.cell.find_nearest_pbc_image(cart_coord_ca, mark.pos, mark.image_idx)
-            # distance > 0 because distance from ca to ca is zero
-            if distance > 0.0:
-                # bonds to symmetry equivalent and not symmetry equivalent central 
-                # atoms are not considered, the central atom or other central atoms_prop
-                # are no ligand atoms
-                if label != site.label and site.element != mark.to_site(st).element:
-                    # more or less same as above for central atom
-                    atoms_prop.append ({'label':mark.to_site(st).label, 
-                    'element': mark.to_site(st).element, 
-                    'real_pos': real_pos,
-                    'relative_pos': relative_pos,
-                    'distance': distance,
-                    'mark_idx': mark.image_idx,
-                    'sym_code': image.symmetry_code(True),
-                    'sym_op': symops[int(image.symmetry_code(True).split('_')[0])-1],
-                    'pbc_shift': image.pbc_shift})
-                    # max and min distance will be printed later
-                    max_dist = max(distance, max_dist)
-                    min_dist = min(distance, min_dist)
-                else:
-                    # usually for symmetry equivalent and not symmetry equivalent central 
-                    # atoms
-                    print(f'{site.label} ({doc.name}): Warning! {label} '
-                          f'({image.symmetry_code(True)}) has been excluded '
-                           'from coordinating atoms.  ')
+            # get the covalent radius of the ligand atom from dict of radii
+            # exit if element is not in dict
+            try:
+                l_radius = covalent_radii_max[el_label.name]
+            except KeyError:
+                print(f'{site.label} ({doc.name}): Warning! {el_label.name} is not in the '
+                       'list of elements. Exit.  ') 
+                sys.exit(1)
+            # bond length: radius(ligand atom) + radius(central atom) + x% (10% default)
+            bond = (l_radius + ca_radius) + (enlarge_bond/100.0)*(l_radius + ca_radius) 
+            # distance of the central atom to the ligand atom from gemmi 
+            distance = real_pos.dist(cart_coord_ca)
+            
+            if arg_dist:
+                # if args.dist, the d parameter is invoked, use this as bond length
+                bond = abs(arg_dist)
+            # all distances smaller than the bond length (which ist the sum of the radii)  
+            # are considered     
+            if distance < bond:
+                #image = st.cell.find_nearest_pbc_image(cart_coord_ca, mark.pos, mark.image_idx)
+                # distance > 0 because distance from ca to ca is zero
+                if distance > 0.0:
+                    # bonds to symmetry equivalent and not symmetry equivalent central 
+                    # atoms are not considered, the central atom or other central atoms_prop
+                    # are no ligand atoms
+                    if label != site.label and site.element != mark.to_site(st).element:
+                        # more or less same as above for central atom
+                        atoms_prop.append ({'label':mark.to_site(st).label, 
+                        'element': mark.to_site(st).element, 
+                        'real_pos': real_pos,
+                        'relative_pos': relative_pos,
+                        'distance': distance,
+                        'mark_idx': mark.image_idx,
+                        'sym_code': image.symmetry_code(True),
+                        'sym_op': symops[int(image.symmetry_code(True).split('_')[0])-1],
+                        'pbc_shift': image.pbc_shift})
+                        # max and min distance will be printed later
+                        max_dist = max(distance, max_dist)
+                        min_dist = min(distance, min_dist)
+                    else:
+                        # usually for symmetry equivalent and not symmetry equivalent central 
+                        # atoms
+                        print(f'{site.label} ({doc.name}): Warning! {label} '
+                              f'({image.symmetry_code(True)}) has been excluded '
+                               'from coordinating atoms.  ')
     # print max and min distances and CN, CIF name and central atom name
     if max_dist and min_dist:
         print(f'{site.label} ({doc.name}): CN = {len(atoms_prop)-1}, '
@@ -578,8 +584,9 @@ def get_atm_prop(doc, atom, arg_dist = 0.0, inc_hydro = True, enlarge_bond = 10.
     # maybe there will be a solution later
     # now, no idea how to circumvent
     # best is to exit
-    duplicates = [atom['real_pos'].x + atom['real_pos'].y + atom['real_pos'].z for atom in atoms_prop]
-    
+    # solution came with gemmi 0.7.3
+    #duplicates = [atom['real_pos'].x + atom['real_pos'].y + atom['real_pos'].z for atom in atoms_prop]
+    duplicates = [atom['label'] + str(atom['mark_idx']) + atom['sym_code'] for atom in atoms_prop]
     if any(count > 1 for count in Counter(duplicates).values()):
         print(f'{label} ({doc.name}): Warning! '
                'Symmetry related atoms on same positions. Exit.  ')
@@ -1262,8 +1269,14 @@ if args.plot:
 if args.plotcolor:
 # plot CShM as bars in color
     plot_barscol(cshm_dict,
-            ['L-2', 'vT-2', 'vOC-2', 
-            'TP-3', 'vT-3', 'fvOC-3', 'mvOC-3', 
-            'SP-4', 'T-4', 'SS-4', 'vTBPY-4', 
-            'PP-5', 'vOC-5', 'TBPY-5', 'SPY-5', 'JTBPY-5', 
-            'HP-6', 'PPY-6', 'OC-6', 'TPR-6', 'JPPY-6'])
+            ['L-2    ❘', 'vT-2    ⋁', 'vOC-2   ∟', 
+            'TP-3    △', 'vT-3    ◮', 'fvOC-3  ◺', 'mvOC-3  ⊤', 
+            'SP-4    ◻', 'T-4     ◮', 'SS-4    ⚻', 'vTBPY-4 ◮', 
+            'PP-5    ⬠', 'vOC-5   ◮', 'TBPY-5  ⬘', 'SPY-5   ◮', 'JTBPY-5 ⬘', 
+            'HP-6    ⬡', 'PPY-6   ◮', 'OC-6    ⬘', 'TPR-6   ◨', 'JPPY-6  ◮'])
+
+#❘ ⋁ ∟ ⌞
+#△ ◮ ◺ ⊤ 
+#◻ ◮ ⌅ ◭ ⚻
+#⬠ ◮ ⬨
+#⬡ ◮ ⬘ 
