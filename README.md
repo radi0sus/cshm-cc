@@ -29,7 +29,7 @@ $\theta$ = experimental X-M-X angles
 $O$ is close to zero for an almost ideal octahedron
 
 ## External modules
- `gemmi`, `numpy`, `scipy`, `tabulate`, `requests` 
+ `gemmi >= 0.7.3`, `numpy`, `scipy`, `tabulate`, `requests` 
  
 ## Quick start
 For local CIFs with one or more entries start the script with:
