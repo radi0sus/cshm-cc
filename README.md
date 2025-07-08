@@ -130,7 +130,7 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - The script downloads the CIF from the COD into a temporary folder. The CIF is deleted after the script finishes.
 
 ## Known Issues
-- In rare cases, the `gemmi` module does not return the correct coordinates for symmetry-equivalent positions. When this happens, the script exits.
+- In rare cases, the `gemmi` module does not return the correct or expected coordinates for symmetry-equivalent positions. When this happens, the script exits. This should be fixed with gemmi >= 0.7.3.
 - If problems arise, the only available option is to reduce the number of bonds considered using the `-d` option.
 - The CShM method is rewritten from the [C++ code](https://github.com/continuous-symmetry-measure/shape) and may still contain errors.
 
