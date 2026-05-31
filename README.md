@@ -1,5 +1,11 @@
 # cshm-cc
 
+> [!TIP]
+> **Trusty `cshm-cc.py` is now available as a web app (thanks to AI)!**  
+> 👉 Try it here: [https://radi0sus.github.io/advanced_cshm-cc/](https://radi0sus.github.io/advanced_cshm-cc/)  
+> 👉 Dive into the [code](https://github.com/radi0sus/advanced_cshm-cc).
+
+
 A Python 3 script that calculates CShM (Continuous Shape Measures) values for various shapes, geometry indices, including τ₄, τ₄', τ₅, *O* (octahedricity) of automatically selected atoms (transition metal atoms by default) from a crystallographic information file (CIF). The CIF may contain one or more entries. It can also calculate these values from COD (Crystallography Open Database) entries by simply entering the COD ID. It also saves the XYZ coordinates of the central atom and its neighboring atoms, including those from CIFs with multiple entries or COD entries and calculates the polyhedral volume. Optionally, tables in Markdown format containing bond lengths and angles can be generated.
 
 ## Introduction
